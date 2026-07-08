@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us | Minimal Monochrome</title>
+    <style>
+        /* Minimalist Black & White Palette */
+        :root {
+            --primary: #111111;
+            --primary-hover: #000000;
+            --dark: #000000;
+            --light: #fdfdfd;
+            --gray-light: #f4f4f4;
+            --border-color: #dddddd;
+            --text-muted: #555555;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            color: var(--dark);
+            background-color: var(--light);
+            letter-spacing: -0.01em;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+
+        /* Clean Typography Hero Section */
+        .hero {
+            text-align: center;
+            padding: 50px 20px;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 60px;
+            animation: fadeIn 0.8s ease-in-out;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: -0.03em;
+            margin: 0 0 15px 0;
+            color: var(--dark);
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            max-width: 550px;
+            margin: 0 auto;
+        }
+
+        /* High-Contrast Interactive Tabs */
+        .tabs-container {
+            margin-bottom: 60px;
+        }
+
+        .tabs {
+            display: flex;
+            justify-content: center;
+            gap: 0; /* Connected block layout */
+            margin-bottom: 35px;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .tab-btn {
+            padding: 15px 30px;
+            border: none;
+            background: transparent;
+            color: var(--text-muted);
+            font-weight: 600;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            cursor: pointer;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        /* Interactive bottom-border slider effect */
+        .tab-btn::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: transparent;
+            transition: background-color 0.3s ease;
+        }
+
+        .tab-btn:hover {
+            color: var(--dark);
+        }
+
+        .tab-btn.active {
+            color: var(--dark);
+            font-weight: 700;
+        }
+
+        .tab-btn.active::after {
+            background-color: var(--dark);
+        }
+
+        .tab-content {
+            display: none;
+            padding: 20px 10px;
+            animation: slideUp 0.4s ease-out;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .tab-content h2 {
+            font-size: 1.8rem;
+            margin-top: 0;
+            font-weight: 700;
+        }
+
+        .tab-content p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+
+        /* Structured Minimal Cards Grid */
+        .section-title {
+            text-align: center;
+            font-size: 1.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-top: 80px;
+            margin-bottom: 40px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .card {
+            background: var(--light);
+            padding: 35px;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        /* Interactive Inverted Hover State */
+        .card:hover {
+            background: var(--dark);
+            border-color: var(--dark);
+            transform: translateY(-5px);
+        }
+
+        .card h3 {
+            margin-top: 0;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--dark);
+            transition: color 0.3s ease;
+        }
+
+        .card p {
+            color: var(--text-muted);
+            margin-bottom: 0;
+            transition: color 0.3s ease;
+        }
+
+        /* Invert card text colors dynamically on hover */
+        .card:hover h3 {
+            color: var(--light);
+        }
+
+        .card:hover p {
+            color: #aaaaaa;
+        }
+
+        /* Smooth CSS Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Responsive Breakpoint */
+        @media (max-width: 600px) {
+            h1 { font-size: 2.5rem; }
+            .tabs { 
+                flex-direction: column; 
+                border-bottom: none;
+                align-items: center;
+            }
+            .tab-btn::after { display: none; }
+            .tab-btn { border-bottom: 1px solid var(--border-color); width: 100%; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        
+        <!-- Hero Header -->
+        <section class="hero">
+            <h1>About Us</h1>
+            <p class="subtitle">A minimal collective crafting intentional, high-performance web experiences.</p>
+        </section>
+
+        <!-- Interactive Tabs Section -->
+        <section class="tabs-container">
+            <div class="tabs">
+                <button class="tab-btn active" onclick="switchTab(event, 'vision')">Vision</button>
+                <button class="tab-btn" onclick="switchTab(event, 'mission')">Mission</button>
+                <button class="tab-btn" onclick="switchTab(event, 'history')">Story</button>
+            </div>
+
+            <div id="vision" class="tab-content active">
+                <h2>Shaping the Digital Horizon</h2>
+                <p>We aim to build immersive web platforms that solve real-world problems. By blending cutting-edge engineering with stark, beautiful UI design, we make the web a cleaner place for everyone to navigate.</p>
+            </div>
+
+            <div id="mission" class="tab-content">
+                <h2>Precision Engineering</h2>
+                <p>Our daily commitment is delivering exceptionally fast, secure, and user-centric websites. We treat web optimization not just as a standard feature, but as a core requirement for everything we build.</p>
+            </div>
+
+            <div id="history" class="tab-content">
+                <h2>The Monolithic Start</h2>
+                <p>Founded by a passionate group of developers and creators, our website footprint grew from a single experimental landing page into a sprawling suite of high-traffic digital resources.</p>
+            </div>
+        </section>
+
+        <!-- Interactive Core Value Cards -->
+        <h2 class="section-title">Core Principles</h2>
+        <section class="grid">
+            <div class="card">
+                <h3>01. Innovation</h3>
+                <p>We avoid cookie-cutter designs. Every project utilizes modern standards to provide fresh, state-of-the-art interactive user experiences.</p>
+            </div>
+            <div class="card">
+                <h3>02. Accessibility</h3>
+                <p>Universal design is key. We closely follow modern web standards ensuring our layouts work flawlessly for people of all user abilities.</p>
+            </div>
+            <div class="card">
+                <h3>03. Integrity</h3>
+                <p>We protect user data ruthlessly. Security architectures are tightly integrated into the backbone of all our website builds.</p>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Interactivity Controller -->
+    <script>
+        function switchTab(event, tabId) {
+            // Remove active states
+            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+
+            // Set new active states
+            document.getElementById(tabId).classList.add('active');
+            event.currentTarget.classList.add('active');
+        }
+    </script>
+
+</body>
+</html>
