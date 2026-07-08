@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About Us | Minimal Monochrome</title>
+    <!-- Idinagdag ang Font Awesome para sa pabalik na arrow icon -->
+    <link rel="stylesheet" href="https://cloudflare.com">
     <style>
         /* Minimalist Black & White Palette */
         :root {
@@ -11,9 +13,9 @@
             --primary-hover: #000000;
             --dark: #000000;
             --light: #fdfdfd;
-            --gray-light: #f4f4f4;
             --border-color: #dddddd;
             --text-muted: #555555;
+            --transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         body {
@@ -26,16 +28,57 @@
             letter-spacing: -0.01em;
         }
 
+        /* Top Action Bar para sa Back Button */
+        .top-bar {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 30px 20px 0 20px;
+            display: flex;
+            justify-content: flex-start;
+        }
+
+        /* Interactive Back Button Styling */
+        .btn-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            color: var(--dark);
+            font-size: 0.9rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            padding: 10px 16px;
+            border: 1px solid var(--border-color);
+            background: transparent;
+            transition: var(--transition);
+        }
+
+        .btn-back i {
+            transition: var(--transition);
+        }
+
+        /* Interactive Hover: Umuusod ang arrow pakaliwa at nag-i-invert ang kulay */
+        .btn-back:hover {
+            background: var(--dark);
+            color: var(--light);
+            border-color: var(--dark);
+        }
+
+        .btn-back:hover i {
+            transform: translateX(-4px);
+        }
+
         .container {
             max-width: 1000px;
             margin: 0 auto;
-            padding: 60px 20px;
+            padding: 30px 20px 60px 20px;
         }
 
         /* Clean Typography Hero Section */
         .hero {
             text-align: center;
-            padding: 50px 20px;
+            padding: 30px 20px 50px 20px;
             border-bottom: 1px solid var(--border-color);
             margin-bottom: 60px;
             animation: fadeIn 0.8s ease-in-out;
@@ -65,7 +108,7 @@
         .tabs {
             display: flex;
             justify-content: center;
-            gap: 0; /* Connected block layout */
+            gap: 0;
             margin-bottom: 35px;
             border-bottom: 2px solid var(--border-color);
         }
@@ -84,7 +127,6 @@
             transition: color 0.3s ease;
         }
 
-        /* Interactive bottom-border slider effect */
         .tab-btn::after {
             content: '';
             position: absolute;
@@ -153,7 +195,6 @@
             transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        /* Interactive Inverted Hover State */
         .card:hover {
             background: var(--dark);
             border-color: var(--dark);
@@ -174,7 +215,6 @@
             transition: color 0.3s ease;
         }
 
-        /* Invert card text colors dynamically on hover */
         .card:hover h3 {
             color: var(--light);
         }
@@ -183,7 +223,6 @@
             color: #aaaaaa;
         }
 
-        /* Smooth CSS Animations */
         @keyframes fadeIn {
             from { opacity: 0; }
             to { opacity: 1; }
@@ -194,7 +233,6 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Responsive Breakpoint */
         @media (max-width: 600px) {
             h1 { font-size: 2.5rem; }
             .tabs { 
@@ -208,6 +246,13 @@
     </style>
 </head>
 <body>
+
+    <!-- Top Action Bar kung saan matatagpuan ang Back Button -->
+    <div class="top-bar">
+        <a href="index.html" class="btn-back">
+            <i class="fa-solid fa-arrow-left"></i> Back
+        </a>
+    </div>
 
     <div class="container">
         
@@ -260,14 +305,11 @@
 
     </div>
 
-    <!-- Interactivity Controller -->
     <script>
         function switchTab(event, tabId) {
-            // Remove active states
             document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
             document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
 
-            // Set new active states
             document.getElementById(tabId).classList.add('active');
             event.currentTarget.classList.add('active');
         }
