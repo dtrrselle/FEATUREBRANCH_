@@ -5,63 +5,82 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Google Search | Monochrome</title>
     <style>
-        /* Minimalist Black & White Palette */
+        /* ============================
+           Root Variables — Monochrome Palette
+        ============================ */
         :root {
-            --primary: #111111;
             --dark: #000000;
-            --light: #fdfdfd;
-            --border-color: #dddddd;
+            --primary: #111111;
+            --light: #ffffff;
+            --off-white: #fafafa;
+            --border-color: #e0e0e0;
             --text-muted: #555555;
+            --text-soft: #888888;
+            --shadow: rgba(0, 0, 0, 0.08);
             --transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
+        * {
+            box-sizing: border-box;
+        }
+
         body {
-            font-family: system-ui, -apple-system, sans-serif;
+            font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
             line-height: 1.6;
             margin: 0;
             padding: 0;
-            background-color: var(--light);
+            background-color: var(--off-white);
             color: var(--dark);
             text-align: center;
             letter-spacing: -0.01em;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
 
-        /* Modern Typography Header */
-        .header-section {
+        /* ============================
+           Navigation Bar
+        ============================ */
+        .site-header {
+            background-color: var(--light);
             border-bottom: 1px solid var(--border-color);
-            padding-bottom: 40px;
-            margin-bottom: 50px;
-            animation: fadeIn 0.8s ease-in-out;
+            position: sticky;
+            top: 0;
+            z-index: 10;
         }
 
-        /* Minimal Navigation Bar */
         .nav {
             display: flex;
             justify-content: center;
-            gap: 30px;
-            padding: 25px 10px;
+            gap: 40px;
+            padding: 22px 10px;
+            max-width: 900px;
+            margin: 0 auto;
         }
 
         .nav a {
             color: var(--text-muted);
             text-decoration: none;
             font-weight: 600;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             text-transform: uppercase;
-            letter-spacing: 0.05em;
+            letter-spacing: 0.06em;
             position: relative;
+            padding-bottom: 6px;
             transition: var(--transition);
         }
 
         .nav a::after {
             content: '';
             position: absolute;
-            bottom: -5px;
+            bottom: 0;
             left: 0;
             width: 100%;
             height: 2px;
-            background-color: transparent;
-            transition: var(--transition);
+            background-color: var(--dark);
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.3s ease;
         }
 
         .nav a:hover {
@@ -69,33 +88,46 @@
         }
 
         .nav a:hover::after {
-            background-color: var(--dark);
+            transform: scaleX(1);
+            transform-origin: left;
         }
 
-        .container {
-            max-width: 800px;
-            margin: auto;
-            padding: 0 20px 60px 20px;
+        /* Active page indicator */
+        .nav a[aria-current="page"] {
+            color: var(--dark);
         }
 
-        h1 {
-            font-size: 3.5rem;
+        .nav a[aria-current="page"]::after {
+            transform: scaleX(1);
+        }
+
+        /* ============================
+           Hero Section
+        ============================ */
+        .hero {
+            padding: 80px 20px 60px 20px;
+            animation: fadeIn 0.8s ease-in-out;
+        }
+
+        .hero h1 {
+            font-size: 3.4rem;
             font-weight: 800;
             text-transform: uppercase;
             letter-spacing: -0.03em;
-            margin: 20px 0 10px 0;
+            margin: 0 0 14px 0;
         }
 
-        .subtitle {
+        .hero .subtitle {
             color: var(--text-muted);
             font-size: 1.1rem;
             max-width: 550px;
-            margin: 0 auto 40px auto;
+            margin: 0 auto 45px auto;
         }
 
-        /* Interactive Search Components */
-        form {
-            margin-bottom: 60px;
+        /* ============================
+           Search Form
+        ============================ */
+        .search-form {
             display: flex;
             justify-content: center;
             align-items: center;
@@ -106,51 +138,71 @@
         .search-wrapper {
             position: relative;
             width: 60%;
+            max-width: 480px;
         }
 
-        input[type="text"] {
+        .search-wrapper input[type="text"] {
             width: 100%;
-            box-sizing: border-box;
             padding: 14px 24px;
             font-size: 1rem;
             border: 1px solid var(--border-color);
-            border-radius: 4px; /* Industrial square profile */
+            border-radius: 6px;
             outline: none;
             background: var(--light);
+            color: var(--dark);
             transition: var(--transition);
         }
 
-        input[type="text"]:focus {
+        .search-wrapper input[type="text"]:focus {
             border-color: var(--dark);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 4px 14px var(--shadow);
         }
 
-        button {
+        .search-form button {
             padding: 14px 28px;
             background-color: var(--dark);
             color: var(--light);
             border: 1px solid var(--dark);
-            border-radius: 4px;
+            border-radius: 6px;
             cursor: pointer;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 0.05em;
             transition: var(--transition);
         }
 
-        button:hover {
+        .search-form button:hover,
+        .search-form button:focus-visible {
             background-color: transparent;
             color: var(--dark);
         }
 
-        /* Interactive Micro-Inverting Info Boxes */
+        /* ============================
+           Main Content / Info Cards
+        ============================ */
+        main {
+            flex: 1;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px 60px 20px;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 24px;
+            text-align: left;
+        }
+
         .info-box {
             background: var(--light);
-            padding: 35px;
-            margin: 20px 0;
+            padding: 32px;
             border: 1px solid var(--border-color);
-            text-align: left;
+            border-radius: 8px;
             transition: var(--transition);
         }
 
@@ -158,53 +210,59 @@
             background: var(--dark);
             border-color: var(--dark);
             transform: translateY(-4px);
-            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 14px 28px var(--shadow);
         }
 
         .info-box h3 {
             margin-top: 0;
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             font-weight: 700;
             color: var(--dark);
             text-transform: uppercase;
-            letter-spacing: 0.02em;
+            letter-spacing: 0.03em;
             transition: var(--transition);
         }
 
-        .info-box p, .info-box li {
+        .info-box p,
+        .info-box li {
             color: var(--text-muted);
-            font-size: 1.05rem;
+            font-size: 1rem;
             transition: var(--transition);
         }
 
-        ul {
+        .info-box ul {
             padding-left: 20px;
-            margin-bottom: 0;
+            margin: 10px 0 0 0;
         }
 
-        li {
+        .info-box li {
             margin-bottom: 8px;
         }
 
-        /* Dynamic Hover Inversion Logic */
         .info-box:hover h3 {
             color: var(--light);
         }
 
-        .info-box:hover p, .info-box:hover li {
-            color: #aaaaaa;
+        .info-box:hover p,
+        .info-box:hover li {
+            color: #bbbbbb;
         }
 
-        /* Minimal Footer */
-        footer {
-            margin-top: 80px;
-            padding: 25px;
+        /* ============================
+           Footer
+        ============================ */
+        .site-footer {
+            margin-top: auto;
+            padding: 28px 20px;
             border-top: 1px solid var(--border-color);
+            background-color: var(--light);
             font-size: 0.9rem;
-            color: var(--text-muted);
+            color: var(--text-soft);
         }
 
-        /* Animations */
+        /* ============================
+           Animations
+        ============================ */
         @keyframes fadeIn {
             from { opacity: 0; }
             to { opacity: 1; }
@@ -215,68 +273,101 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Responsive Breaks */
+        /* ============================
+           Responsive Breakpoints
+        ============================ */
         @media (max-width: 600px) {
-            form {
+            .nav {
+                gap: 20px;
+            }
+
+            .search-form {
                 flex-direction: column;
                 gap: 15px;
             }
+
             .search-wrapper {
                 width: 100%;
             }
-            button {
+
+            .search-form button {
                 width: 100%;
             }
-            h1 {
-                font-size: 2.6rem;
+
+            .hero h1 {
+                font-size: 2.4rem;
+            }
+
+            .hero {
+                padding: 50px 20px 40px 20px;
             }
         }
     </style>
 </head>
 <body>
 
-    <div class="header-section">
-        <div class="nav">
-            <a href="index.html">Home</a>
+    <!-- ============================
+         Header / Navigation
+    ============================ -->
+    <header class="site-header">
+        <nav class="nav" aria-label="Main navigation">
+            <a href="index.html" aria-current="page">Home</a>
             <a href="about.html">About</a>
             <a href="Contact.html">Contact</a>
-        </div>
-    </div>
+        </nav>
+    </header>
 
-    <div class="container">
-        <h1>Google Search</h1>
-        <p class="subtitle">
-            A simple web page demonstrating GitHub Feature Branch Workflow,
-            Pull Requests, and GitHub Pages deployment.
-        </p>
-        
-        <form action="https://www.google.com/search">
-            <div class="search-wrapper">
-                <input type="text" name="q" placeholder="Search Google">
-            </div>
-            <button type="submit">Search</button>
-        </form>
-
-        <div class="info-box">
-            <h3>Project Information</h3>
-            <p>
-                This website was developed as part of a collaborative GitHub activity.
-                Each team member worked on a separate feature branch before merging
-                their changes into the main branch.
+    <main>
+        <!-- ============================
+             Hero / Search Section
+        ============================ -->
+        <section class="hero">
+            <h1>Google Search</h1>
+            <p class="subtitle">
+                A simple web page demonstrating GitHub Feature Branch Workflow,
+                Pull Requests, and GitHub Pages deployment.
             </p>
-        </div>
 
-        <div class="info-box">
-            <h3>Features</h3>
-            <ul>
-                <li>Simple and clean search interface</li>
-                <li>Redirects search queries straight to Google</li>
-                <li>Responsive layout</li>
-            </ul>
-        </div>
-    </div>
+            <form class="search-form" action="https://www.google.com/search" method="GET" role="search">
+                <div class="search-wrapper">
+                    <label for="q" class="visually-hidden" hidden>Search Google</label>
+                    <input type="text" id="q" name="q" placeholder="Search Google" autocomplete="off" required>
+                </div>
+                <button type="submit">Search</button>
+            </form>
+        </section>
 
-    <footer>
+        <!-- ============================
+             Information Cards
+        ============================ -->
+        <div class="container">
+            <div class="cards">
+                <article class="info-box">
+                    <h3>Project Information</h3>
+                    <p>
+                        This website was developed as part of a collaborative GitHub activity.
+                        Each team member worked on a separate feature branch before merging
+                        their changes into the main branch.
+                    </p>
+                </article>
+
+                <article class="info-box">
+                    <h3>Features</h3>
+                    <ul>
+                        <li>Simple and clean search interface</li>
+                        <li>Redirects search queries straight to Google</li>
+                        <li>Responsive layout for desktop and mobile</li>
+                        <li>Built and deployed using GitHub Pages</li>
+                    </ul>
+                </article>
+            </div>
+        </div>
+    </main>
+
+    <!-- ============================
+         Footer
+    ============================ -->
+    <footer class="site-footer">
         &copy; 2026 Git Collaborative Project. Built with clean, structural standards.
     </footer>
 
