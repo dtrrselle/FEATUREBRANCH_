@@ -3,123 +3,260 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Google Search</title>
+    <title>Google Search | Monochrome</title>
     <style>
+        /* Minimalist Black & White Palette */
+        :root {
+            --primary: #111111;
+            --dark: #000000;
+            --light: #fdfdfd;
+            --border-color: #dddddd;
+            --text-muted: #555555;
+            --transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
         body {
-            font-family: Arial, sans-serif;
+            font-family: system-ui, -apple-system, sans-serif;
+            line-height: 1.6;
             margin: 0;
             padding: 0;
-            background-color: #f8f9fa;
-            color: #202124;
+            background-color: var(--light);
+            color: var(--dark);
             text-align: center;
+            letter-spacing: -0.01em;
         }
+
+        /* Modern Typography Header */
+        .header-section {
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 40px;
+            margin-bottom: 50px;
+            animation: fadeIn 0.8s ease-in-out;
+        }
+
+        /* Minimal Navigation Bar */
+        .nav {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            padding: 25px 10px;
+        }
+
+        .nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            position: relative;
+            transition: var(--transition);
+        }
+
+        .nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: transparent;
+            transition: var(--transition);
+        }
+
+        .nav a:hover {
+            color: var(--dark);
+        }
+
+        .nav a:hover::after {
+            background-color: var(--dark);
+        }
+
         .container {
             max-width: 800px;
             margin: auto;
-            padding: 20px;
+            padding: 0 20px 60px 20px;
         }
-        .nav {
-            background-color: #4285f4;
-            padding: 10px;
+
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: -0.03em;
+            margin: 20px 0 10px 0;
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            max-width: 550px;
+            margin: 0 auto 40px auto;
+        }
+
+        /* Interactive Search Components */
+        form {
+            margin-bottom: 60px;
             display: flex;
             justify-content: center;
-            gap: 20px;
+            align-items: center;
+            gap: 12px;
+            animation: slideUp 0.6s ease-out;
         }
-        .nav a {
-            color: white;
-            text-decoration: none;
-            font-weight: bold;
-        }
-        .nav a:hover {
-            text-decoration: underline;
-        }
-        h1 {
-            font-size: 2.5rem;
-            margin-top: 20px;
-        }
-        .subtitle {
-            color: #5f6368;
-            font-size: 1rem;
-            margin-bottom: 30px;
-        }
-        form {
-            margin-bottom: 30px;
-        }
-        input[type="text"] {
+
+        .search-wrapper {
+            position: relative;
             width: 60%;
-            padding: 10px;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 14px 24px;
             font-size: 1rem;
-            border: 1px solid #dadce0;
-            border-radius: 24px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px; /* Industrial square profile */
             outline: none;
+            background: var(--light);
+            transition: var(--transition);
         }
+
         input[type="text"]:focus {
-            border-color: #4285f4;
-            box-shadow: 0 0 5px rgba(66, 133, 244, 0.5);
+            border-color: var(--dark);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
         }
+
         button {
-            padding: 10px 20px;
-            margin-left: 10px;
-            background-color: #4285f4;
-            color: white;
-            border: none;
-            border-radius: 24px;
+            padding: 14px 28px;
+            background-color: var(--dark);
+            color: var(--light);
+            border: 1px solid var(--dark);
+            border-radius: 4px;
             cursor: pointer;
-            font-size: 1rem;
+            font-size: 0.95rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            transition: var(--transition);
         }
+
         button:hover {
-            background-color: #357ae8;
+            background-color: transparent;
+            color: var(--dark);
         }
+
+        /* Interactive Micro-Inverting Info Boxes */
         .info-box {
-            background: white;
-            padding: 20px;
-            margin: 15px 0;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            background: var(--light);
+            padding: 35px;
+            margin: 20px 0;
+            border: 1px solid var(--border-color);
             text-align: left;
+            transition: var(--transition);
         }
+
+        .info-box:hover {
+            background: var(--dark);
+            border-color: var(--dark);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
+        }
+
         .info-box h3 {
             margin-top: 0;
-            color: #202124;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--dark);
+            text-transform: uppercase;
+            letter-spacing: 0.02em;
+            transition: var(--transition);
         }
-        ul, ol {
+
+        .info-box p, .info-box li {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+            transition: var(--transition);
+        }
+
+        ul {
             padding-left: 20px;
+            margin-bottom: 0;
         }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        /* Dynamic Hover Inversion Logic */
+        .info-box:hover h3 {
+            color: var(--light);
+        }
+
+        .info-box:hover p, .info-box:hover li {
+            color: #aaaaaa;
+        }
+
+        /* Minimal Footer */
         footer {
-            margin-top: 30px;
-            padding: 15px;
-            background-color: #f1f3f4;
+            margin-top: 80px;
+            padding: 25px;
+            border-top: 1px solid var(--border-color);
             font-size: 0.9rem;
-            color: #5f6368;
+            color: var(--text-muted);
         }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Responsive Breaks */
         @media (max-width: 600px) {
-            input[type="text"] {
+            form {
+                flex-direction: column;
+                gap: 15px;
+            }
+            .search-wrapper {
                 width: 100%;
-                margin-bottom: 10px;
             }
             button {
                 width: 100%;
-                margin-left: 0;
+            }
+            h1 {
+                font-size: 2.6rem;
             }
         }
     </style>
 </head>
 <body>
-    <div class="container">
+
+    <div class="header-section">
         <div class="nav">
             <a href="index.html">Home</a>
             <a href="about.html">About</a>
             <a href="Contact.html">Contact</a>
         </div>
+    </div>
+
+    <div class="container">
         <h1>Google Search</h1>
         <p class="subtitle">
             A simple web page demonstrating GitHub Feature Branch Workflow,
             Pull Requests, and GitHub Pages deployment.
         </p>
+        
         <form action="https://www.google.com/search">
-            <input type="text" name="q" placeholder="Search Google">
-            <button type="submit">Google Search</button>
+            <div class="search-wrapper">
+                <input type="text" name="q" placeholder="Search Google">
+            </div>
+            <button type="submit">Search</button>
         </form>
+
         <div class="info-box">
             <h3>Project Information</h3>
             <p>
@@ -128,9 +265,20 @@
                 their changes into the main branch.
             </p>
         </div>
+
         <div class="info-box">
             <h3>Features</h3>
             <ul>
                 <li>Simple and clean search interface</li>
                 <li>Redirects search queries straight to Google</li>
-                <li>Responsive layout
+                <li>Responsive layout</li>
+            </ul>
+        </div>
+    </div>
+
+    <footer>
+        &copy; 2026 Git Collaborative Project. Built with clean, structural standards.
+    </footer>
+
+</body>
+</html>
