@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact Us</title>
-    <!-- Professional Font and Icons -->
     <link rel="preconnect" href="https://googleapis.com">
     <link rel="preconnect" href="https://gstatic.com" crossorigin>
     <link href="https://googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -12,14 +11,14 @@
 
     <style>
         :root {
-            --bg-color: #ffffff; /* Changed to pure white */
-            --card-bg: #f8fafc;  /* Changed to soft light grey for professional contrast */
+            --bg-color: #ffffff; 
+            --card-bg: #f8fafc;  
             --text-main: #0f172a;
             --text-muted: #475569;
-            --border-color: #e2e8f0;
+            --grid-line: #cbd5e1;
+            --grid-line-subtle: #e2e8f0;
             --accent-color: #2563eb;
             --accent-hover: #1d4ed8;
-            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
         }
 
         * {
@@ -36,83 +35,101 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 20px;
+            padding: 24px;
+            background-image: 
+                linear-gradient(to right, rgba(15, 23, 42, 0.03) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(15, 23, 42, 0.03) 1px, transparent 1px);
+            background-size: 24px 24px;
         }
 
         .contact-card {
             background: var(--card-bg);
             width: 100%;
-            max-width: 420px;
-            padding: 40px;
-            border-radius: 16px;
-            border: 1px solid var(--border-color);
-            box-shadow: var(--shadow);
+            max-width: 440px;
+            border-radius: 0px;
+            border: 1px solid var(--grid-line);
+            outline: 6px solid rgba(15, 23, 42, 0.02);
+            position: relative;
         }
+
+        .contact-card::before, .contact-card::after {
+            content: '';
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            border: 1px solid var(--grid-line);
+            pointer-events: none;
+        }
+        .contact-card::before { top: -6px; left: -6px; border-right: none; border-bottom: none; }
+        .contact-card::after { bottom: -6px; right: -6px; border-left: none; border-top: none; }
 
         .header {
             text-align: center;
-            margin-bottom: 32px;
+            padding: 40px 40px 32px 40px;
+            border-bottom: 1px solid var(--grid-line-subtle);
         }
 
         h1 {
-            font-size: 28px;
+            font-size: 26px;
             font-weight: 700;
             letter-spacing: -0.02em;
             margin-bottom: 8px;
+            text-transform: uppercase;
+            font-size: 22px;
+            letter-spacing: 0.05em;
         }
 
         .subtitle {
             color: var(--text-muted);
-            font-size: 15px;
+            font-size: 14px;
             line-height: 1.5;
         }
 
         .info-list {
             display: flex;
             flex-direction: column;
-            gap: 16px;
         }
 
         .info-item {
             display: flex;
             align-items: center;
-            gap: 16px;
-            padding: 16px;
-            border-radius: 12px;
-            border: 1px solid var(--border-color);
-            background: #ffffff; /* Inner fields stay clean white */
-            transition: all 0.2s ease-in-out;
+            gap: 20px;
+            padding: 24px 40px;
+            border-bottom: 1px solid var(--grid-line-subtle);
+            background: #ffffff;
+            transition: background-color 0.2s ease;
         }
 
         .info-item:hover {
-            border-color: var(--accent-color);
-            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.05);
+            background-color: #f1f5f9;
         }
 
         .icon-wrapper {
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 44px;
-            height: 44px;
+            width: 40px;
+            height: 40px;
             background: #eff6ff;
             color: var(--accent-color);
-            border-radius: 10px;
-            font-size: 18px;
+            border: 1px solid #dbeafe;
+            border-radius: 4px;
+            font-size: 16px;
+            flex-shrink: 0;
         }
 
         .content {
             display: flex;
             flex-direction: column;
-            gap: 4px;
+            gap: 2px;
         }
 
         .label {
-            font-size: 13px;
-            font-weight: 600;
+            font-size: 11px;
+            font-weight: 700;
             color: var(--text-muted);
             text-transform: uppercase;
-            letter-spacing: 0.05em;
+            letter-spacing: 0.08em;
         }
 
         .value {
@@ -129,12 +146,12 @@
         }
 
         footer {
-            margin-top: 32px;
-            padding-top: 24px;
-            border-top: 1px solid var(--border-color);
+            padding: 24px 40px;
             text-align: center;
             color: var(--text-muted);
-            font-size: 13px;
+            font-size: 12px;
+            letter-spacing: 0.02em;
+            background: var(--card-bg);
         }
     </style>
 </head>
