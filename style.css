@@ -4,6 +4,17 @@ body {
     margin-top: 100px;
 }
 
+.nav {
+    margin-bottom: 30px;
+}
+
+.nav a {
+    text-decoration: none;
+    margin: 0 15px;
+    color: blue;
+    font-weight: bold;
+}
+
 input {
     width: 300px;
     padding: 10px;
